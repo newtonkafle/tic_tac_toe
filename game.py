@@ -1,12 +1,8 @@
-## steps to categorize the player 1 and player 2
-## find the win or lose
-## calculate the score
-## calculate the round
-## reset the board when all the box is filled
+
 import time
 class Play:
     def __init__(self):
-        self.round=None
+        self.round=0
         self.score = {'player_1': 0, 'player_2': 0}
         self.player= True
         self.box_list = []
@@ -21,12 +17,12 @@ class Play:
 
         if self.check_winner():
             # increase the round
-            self.round =+1
+            self.round += 1
             # increase the score for the respective player
             self.score[self.current_user] += 1
-            print(self.score)
             self.reset_board()
 
+        # reset the box when win
         if len(self.box_list) >= 9:
             time.sleep(2)
             self.reset_board()
@@ -67,11 +63,9 @@ class Play:
 
     """check the winner if the condition matches"""
     def check_winner(self):
-        print(self.player_move)
         # returns true if condition matched with the user steps to win
         for cond in self.winner_cond:
             is_win =(all(item in self.player_move[self.current_user] for item in cond))
-            print(is_win)
             if is_win:
                 return is_win
 
@@ -91,7 +85,6 @@ class Play:
 
         items.append([f"{char}{num}" for num, char in enumerate(self.name)])
         items.append([f"{char}{2-num}" for num, char in enumerate(self.name)])
-        print(items)
         return items
 
 
